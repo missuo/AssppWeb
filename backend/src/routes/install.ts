@@ -125,6 +125,7 @@ router.get("/install/:id/payload.ipa", (req: Request, res: Response) => {
 
   const stream = fs.createReadStream(resolvedPath);
   stream.pipe(res);
+  res.on("close", () => stream.destroy());
 });
 
 // Small icon placeholder (57x57)

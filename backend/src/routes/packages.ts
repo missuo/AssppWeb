@@ -95,6 +95,7 @@ router.get("/packages/:id/file", (req: Request, res: Response) => {
 
   const stream = fs.createReadStream(resolvedPath);
   stream.pipe(res);
+  res.on("close", () => stream.destroy());
 });
 
 // Delete a package (requires accountHash)
